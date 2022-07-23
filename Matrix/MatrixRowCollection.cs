@@ -32,27 +32,3 @@ public readonly struct MatrixRowCollection : IReadOnlyCollection<MatrixRow>, IMa
         public void Dispose() { }
     }
 }
-
-// internal struct MatrixRowsEnumerator : IEnumerator<RowIndexer> {
-//     private readonly MatrixRows _rows;
-//     private int _index = -1;
-//
-//     internal MatrixRowsEnumerator(MatrixRows rows) {
-//         _rows = rows;
-//     }
-//
-//     public bool MoveNext() {
-//         _index++;
-//         return _index < _rows.Count;
-//     }
-//
-//     public void Reset() {
-//         _index = -1;
-//     }
-//
-//     public RowIndexer Current => _rows[_index];
-//
-//     object IEnumerator.Current => Current;
-//
-//     public void Dispose() { throw new NotImplementedException(); }
-// }

@@ -55,10 +55,7 @@ internal static class MatrixHelper {
     }
 
     internal static Matrix Flip2X2(Matrix matrix) {
-        // var num = matrix.Columns;
-        // var result = new Matrix(num, num);
         (matrix[0, 0], matrix[1, 1]) = (matrix[1, 1], matrix[0, 0]);
-        // (matrix[0, 1], matrix[1, 0]) = (matrix[1, 0], matrix[0, 1]);
         matrix[0, 1] *= -1;
         matrix[1, 0] *= -1;
 

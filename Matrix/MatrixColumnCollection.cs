@@ -43,4 +43,10 @@ public readonly struct MatrixColumnCollection : IReadOnlyCollection<MatrixColumn
         object IEnumerator.Current => Current;
         public void Dispose() { }
     }
+
+    public static bool operator ==(MatrixColumnCollection left, MatrixColumnCollection right)
+        => left.Equals(right);
+
+    public static bool operator !=(MatrixColumnCollection left, MatrixColumnCollection right)
+        => !left.Equals(right);
 }

@@ -5,11 +5,6 @@ namespace FluentMatrix;
 public interface IMatrix {
     int Rows { get; }
     int Columns { get; }
-
-    // Elements Elements { get; }
-
-    // RowIndexer RowAt(int rowNum);
-    // ColumnIndexer ColumnAt(int colNum);
     double this[int row, int col] { get; set; }
 }
 
@@ -24,7 +19,6 @@ public class Matrix : IMatrix, ICloneable, IReadOnlyCollection<MatrixElement> {
 
         Rows = rows;
         Columns = columns;
-        // var x = new Dictionary<int, int>();
         _matrix = new double[rows, columns];
     }
 
@@ -66,10 +60,6 @@ public class Matrix : IMatrix, ICloneable, IReadOnlyCollection<MatrixElement> {
     /// <returns></returns>
     public static Matrix operator *(double constant, Matrix matrix) {
         var result = new MatrixBuilder(matrix.Rows, matrix.Columns);
-        // foreach (var item in matrix.Elements) {
-        //     item.Value *= constant;
-        //     // result.Add(constant * item);
-        // }
         for (int i = 0; i < matrix.Rows; i++) {
             for (int j = 0; j < matrix.Columns; j++) {
                 result[i, j] = matrix[i, j] * constant;
@@ -201,8 +191,6 @@ public class Matrix : IMatrix, ICloneable, IReadOnlyCollection<MatrixElement> {
             2 => MatrixHelper.Flip2X2(matrix.Clone()).ScalarMultiply(multiplier),
             _ => throw new NotImplementedException()
         };
-        // var result = (1 / determinant) * matrix.Transpose();
-        // return result;
     }
 
     public double this[int row, int col] {
@@ -210,6 +198,11 @@ public class Matrix : IMatrix, ICloneable, IReadOnlyCollection<MatrixElement> {
         set => _matrix[row, col] = value;
     }
 
+    /// <summary>
+    /// Creates a reference matrix (subset of a matrix) without creating a new matrix.
+    /// </summary>
+    /// <param name="row"></param>
+    /// <param name="col"></param>
     public Matrix this[Range row, Range col] {
         get => throw new NotImplementedException();
         set => throw new NotImplementedException();
@@ -220,8 +213,7 @@ public class Matrix : IMatrix, ICloneable, IReadOnlyCollection<MatrixElement> {
             Console.WriteLine(string.Join(' ', row));
         }
     }
-
-    // public static implicit operator Matrix(MatrixBuilder builder) => builder.AsMatrix();
+    
     object ICloneable.Clone() => Clone();
 
     public Matrix Clone() {
@@ -231,7 +223,6 @@ public class Matrix : IMatrix, ICloneable, IReadOnlyCollection<MatrixElement> {
         }
 
         return newMatrix;
-        // return Create(Rows, Columns).Add(Elements.Select(x => x.Value));
     }
 
     public Matrix CloneExclude(int row, int column) {
@@ -249,19 +240,15 @@ public class Matrix : IMatrix, ICloneable, IReadOnlyCollection<MatrixElement> {
         return newMatrix;
     }
 
-
     public Enumerator GetEnumerator() => new(this);
-
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     IEnumerator<MatrixElement> IEnumerable<MatrixElement>.GetEnumerator() => GetEnumerator();
 
     public struct Enumerator : IEnumerator<MatrixElement> {
         private readonly Matrix _matrix;
         private int _col = -1;
-
         private int _row = 0;
-
-        // List<int>
+        
         public Enumerator(Matrix matrix) { _matrix = matrix; }
 
         public bool MoveNext() {
@@ -277,10 +264,8 @@ public class Matrix : IMatrix, ICloneable, IReadOnlyCollection<MatrixElement> {
             _row = 0;
         }
 
-        public MatrixElement Current => new(_matrix, _row, _col); // _matrix[_row, _col];
-
-        object IEnumerator.Current => throw new NotImplementedException();
-
+        public MatrixElement Current => new(_matrix, _row, _col);
+        object IEnumerator.Current => Current;
         public void Dispose() { }
     }
 

@@ -11,6 +11,7 @@ Simplify matrix calculation for .NET application.
 - Simple enumeration of elements
 - Enumeration of elements as reference
 - Minimal heap memory allocation
+- Create submatrix without creating new matrix*
 
 ## Example Usage
 

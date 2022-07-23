@@ -2,9 +2,6 @@ using System.Collections;
 
 namespace FluentMatrix;
 
-/// <summary>
-/// Enumerate columns from left to right
-/// </summary>
 public readonly struct MatrixColumn :
     IReadOnlyCollection<MatrixElement>,
     IEquatable<MatrixColumn> {

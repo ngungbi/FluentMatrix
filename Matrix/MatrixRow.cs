@@ -2,9 +2,6 @@ using System.Collections;
 
 namespace FluentMatrix;
 
-/// <summary>
-/// Enumerate rows from top to bottom
-/// </summary>
 public readonly struct MatrixRow :
     IReadOnlyCollection<MatrixElement>,
     IEquatable<MatrixRow> {
